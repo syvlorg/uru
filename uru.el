@@ -31,7 +31,7 @@
 
 ;;;###autoload
 (defmacro defuru* (ua major-mode name &rest args)
-  (push `(,ua ,major-mode ,(intern (concat (symbol-name name) "/body"))) meq/var/ua-major-mode-deinos)
+  (push `(,ua ,major-mode ,(meq/inconcat (symbol-name name) "/body")) meq/var/ua-major-mode-deinos)
   `(defdeino ,name ,@args))
 
 ;;;###autoload
