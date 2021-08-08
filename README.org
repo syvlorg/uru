@@ -53,7 +53,8 @@
 (defun uru (&optional ua) (interactive "p")
   (mapc #'uru* (if current-prefix-arg
                   (--filter (= (car it) ua) (--remove (booleanp (car it)) meq/var/ua-major-mode-deinos))
-                  (--filter (booleanp (car it)) meq/var/ua-major-mode-deinos))))
+                  (--filter (booleanp (car it)) meq/var/ua-major-mode-deinos)))
+  (unless deino-curr-map (message "Sorry! No uru deinos were created for this major-mode!")))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
@@ -76,6 +77,54 @@
     (use-package-process-keywords name rest state)))
 
 (add-to-list 'use-package-keywords :urua t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'meq)
+
+(defvar meq/var/ua-minor-mode-deinos nil)
+
+;;;###autoload
+(defmacro defminoru* (ua minor-mode name &rest args)
+  (push `(,ua ,minor-mode ,(meq/inconcat (symbol-name name) "/body")) meq/var/ua-minor-mode-deinos)
+  `(defdeino ,name ,@args))
+
+;;;###autoload
+(defmacro defminoru (minor-mode name &rest args) `(defminoru* nil ,minor-mode ,name ,@args))
+
+;;;###autoload
+(defmacro defminorua (ua minor-mode name &rest args) `(defminoru* ,ua ,minor-mode ,name ,@args))
+
+(defun minoru* (minoru-list) (when (eval `(meq/fbatp ,(cadr minoru-list))) (funcall (caddr minoru-list))))
+
+;;;###autoload
+(defun minoru (&optional ua) (interactive "p")
+  (mapc #'minoru* (if current-prefix-arg
+                  (--filter (= (car it) ua) (--remove (booleanp (car it)) meq/var/ua-minor-mode-deinos))
+                  (--filter (booleanp (car it)) meq/var/ua-minor-mode-deinos)))
+  (unless deino-curr-map (message "Sorry! No uru deinos were created for this minor-mode!")))
+
+;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+;;;###autoload
+(defalias 'use-package-normalize/:minoru 'use-package-normalize-forms)
+
+;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
+;;;###autoload
+(defun use-package-handler/:minoru (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(defminoru ,@def)) args)
+    (use-package-process-keywords name rest state)))
+
+(add-to-list 'use-package-keywords :minoru t)
+
+;;;###autoload
+(defalias 'use-package-normalize/:minorua 'use-package-normalize-forms)
+
+;;;###autoload
+(defun use-package-handler/:minorua (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(defminorua ,@def)) args)
+    (use-package-process-keywords name rest state)))
+
+(add-to-list 'use-package-keywords :minorua t)
 
 (provide 'uru)
 ;;; uru.el ends here
