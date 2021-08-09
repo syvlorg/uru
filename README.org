@@ -104,11 +104,9 @@
                   (--filter (booleanp (car it)) meq/var/ua-minor-mode-deinos)))
   (unless deino-curr-map (message "Sorry! No uru deinos were created for this minor-mode!")))
 
-;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:minoru 'use-package-normalize-forms)
 
-;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
 ;;;###autoload
 (defun use-package-handler/:minoru (name keyword args rest state)
     (use-package-concat (mapcar #'(lambda (def) `(defminoru ,@def)) args)
