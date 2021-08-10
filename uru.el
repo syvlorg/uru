@@ -40,7 +40,9 @@
 ;;;###autoload
 (defmacro defurua (ua major-mode name &rest args) `(defuru* ,ua ,major-mode ,name ,@args))
 
-(defun uru* (uru-list) (when (derived-mode-p (cadr uru-list)) (funcall (caddr uru-list))))
+(defun uru* (uru-list) (if (car uru-list)
+  (when (derived-mode-p (cadr uru-list)) (funcall (caddr uru-list)))
+  (when (equal major-mode (cadr uru-list)) (funcall (caddr uru-list)))))
 
 ;;;###autoload
 (defun uru (&optional ua) (interactive "p")
