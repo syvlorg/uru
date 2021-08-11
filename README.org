@@ -50,7 +50,7 @@ by [[Andy Drop][https://codeberg.org/dr.ops]].
 ;;;###autoload
 (defmacro defurua (ua major-mode name &rest args) `(defuru* ,ua ,major-mode ,name ,@args))
 
-(defun uru* (uru-list) (if (car uru-list)
+(defun uru* (uru-list) (if current-prefix-arg
   (when (derived-mode-p (cadr uru-list)) (funcall (caddr uru-list)))
   (when (equal major-mode (cadr uru-list)) (funcall (caddr uru-list)))))
 
