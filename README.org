@@ -4,7 +4,7 @@
 
 * uru
 
-Inspired by the [[magic medusa hydra][https://codeberg.org/dr.ops/medusa/src/branch/main/medusa.org#headline-5]],
+Inspired by the [[magic medusa hydra][https://codeberg.org/dr.ops/medusa/src/branch/main/medusa.org#headline-4]],
 by [[Andy Drop][https://codeberg.org/dr.ops]].
 
 #+begin_src emacs-lisp :tangle uru.el
