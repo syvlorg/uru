@@ -1,13 +1,12 @@
-#!/usr/bin/env mdsh
-#+property: header-args -n -r -l "[{(<%s>)}]" :tangle-mode (identity 0444) :noweb yes :mkdirp yes
-#+startup: show3levels
+#+setupfile: ./settings/README.org
+#+include: ./settings/README.org
 
-* uru
+* uru.el
 
 Inspired by the [[magic medusa hydra][https://codeberg.org/dr.ops/medusa/src/branch/main/medusa.org#headline-4]],
 by [[Andy Drop][https://codeberg.org/dr.ops]].
 
-#+begin_src emacs-lisp :tangle uru.el
+#+begin_src emacs-lisp :tangle (meq/tangle-path)
 ;;; uru.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
