@@ -1,6 +1,3 @@
-#+setupfile: ./settings/README.org
-#+include: ./settings/README.org
-
 * uru.el
 
 Inspired by the [[magic medusa hydra][https://codeberg.org/dr.ops/medusa/src/branch/main/medusa.org#headline-4]],
