@@ -1,14 +1,77 @@
-* uru.el
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-11-14 Mon 10:37 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jeet Ray" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/primary/syvl.css" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
+<link rel="manifest" href="https://combinatronics.io/sylvorg/settings/main/manifest.json" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/highlight/paraiso-dark.min.css" />
+<script src="https://combinatronics.io/sylvorg/settings/main/src/scripts/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<div class="header">
+<h1>We Are Syvlorg.</h1>
+<a href="">About Me</a>
+<a href="">About This Website</a>
+<a href="">About Syvlorg</a>
+<a href="https://resume.syvl.org">Résumé</a>
+<a href="https://index.syvl.org">Index</a>
+</div>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org5d7c383">uru.el</a></li>
+</ul>
+</div>
+</div>
 
-Inspired by the [[https://codeberg.org/dr.ops/medusa/src/commit/96147342e426f596095a3fb5c45e14278e029cb2/medusa.org#headline-4][magic medusa hydra]],
-by [[https://codeberg.org/dr.ops][Andy Drop]].
+<div id="outline-container-org5d7c383" class="outline-2">
+<h2 id="org5d7c383">uru.el</h2>
+<div class="outline-text-2" id="text-org5d7c383">
+<p>
+Inspired by the <a href="https://codeberg.org/dr.ops/medusa/src/commit/96147342e426f596095a3fb5c45e14278e029cb2/medusa.org#headline-4">magic medusa hydra</a>,
+by <a href="https://codeberg.org/dr.ops">Andy Drop</a>.
+</p>
 
-#+begin_src emacs-lisp :tangle (meq/tangle-path)
-;;; uru.el --- a simple package                     -*- lexical-binding: t; -*-
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">;;; uru.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
 
-;; Author: Jeet Ray <aiern@protonmail.com>
+;; Author: Jeet Ray &lt;aiern@protonmail.com&gt;
 ;; Keywords: lisp
 ;; Version: 0.0.1
 
@@ -23,7 +86,7 @@ by [[https://codeberg.org/dr.ops][Andy Drop]].
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 
 ;;; Commentary:
 
@@ -36,22 +99,22 @@ by [[https://codeberg.org/dr.ops][Andy Drop]].
 (defvar meq/var/ua-major-mode-deinos nil)
 
 ;;;###autoload
-(defmacro defuru* (ua major-mode derived name &rest args)
+(defmacro defuru* (ua major-mode derived name &amp;rest args)
   (push `(,ua ,major-mode ,derived ,(meq/inconcat (symbol-name name) "/body")) meq/var/ua-major-mode-deinos)
   `(defdeino ,name ,@args))
 
 ;;;###autoload
-(defmacro defuru (major-mode derived name &rest args) `(defuru* nil ,major-mode ,derived ,name ,@args))
+(defmacro defuru (major-mode derived name &amp;rest args) `(defuru* nil ,major-mode ,derived ,name ,@args))
 
 ;;;###autoload
-(defmacro defurua (ua major-mode name &rest args) `(defuru* ,ua ,major-mode nil ,name ,@args))
+(defmacro defurua (ua major-mode name &amp;rest args) `(defuru* ,ua ,major-mode nil ,name ,@args))
 
 (defun uru* (uru-list) (if (or (caddr uru-list) current-prefix-arg)
   (when (derived-mode-p (cadr uru-list)) (funcall (cadddr uru-list)))
   (when (equal major-mode (cadr uru-list)) (funcall (cadddr uru-list)))))
 
 ;;;###autoload
-(defun uru (&optional ua) (interactive "p")
+(defun uru (&amp;optional ua) (interactive "p")
   (mapc #'uru* (if current-prefix-arg
                   (--filter (= (car it) ua) (--remove (booleanp (car it)) meq/var/ua-major-mode-deinos))
                   (--filter (booleanp (car it)) meq/var/ua-major-mode-deinos)))
@@ -87,20 +150,20 @@ by [[https://codeberg.org/dr.ops][Andy Drop]].
 (defvar meq/var/ua-minor-mode-deinos nil)
 
 ;;;###autoload
-(defmacro defminoru* (ua minor-mode name &rest args)
+(defmacro defminoru* (ua minor-mode name &amp;rest args)
   (push `(,ua ,minor-mode ,(meq/inconcat (symbol-name name) "/body")) meq/var/ua-minor-mode-deinos)
   `(defdeino ,name ,@args))
 
 ;;;###autoload
-(defmacro defminoru (minor-mode name &rest args) `(defminoru* nil ,minor-mode ,name ,@args))
+(defmacro defminoru (minor-mode name &amp;rest args) `(defminoru* nil ,minor-mode ,name ,@args))
 
 ;;;###autoload
-(defmacro defminorua (ua minor-mode name &rest args) `(defminoru* ,ua ,minor-mode ,name ,@args))
+(defmacro defminorua (ua minor-mode name &amp;rest args) `(defminoru* ,ua ,minor-mode ,name ,@args))
 
 (defun minoru* (minoru-list) (when (eval `(meq/fbatp ,(cadr minoru-list))) (funcall (caddr minoru-list))))
 
 ;;;###autoload
-(defun minoru (&optional ua) (interactive "p")
+(defun minoru (&amp;optional ua) (interactive "p")
   (mapc #'minoru* (if current-prefix-arg
                   (--filter (= (car it) ua) (--remove (booleanp (car it)) meq/var/ua-minor-mode-deinos))
                   (--filter (booleanp (car it)) meq/var/ua-minor-mode-deinos)))
@@ -129,4 +192,15 @@ by [[https://codeberg.org/dr.ops][Andy Drop]].
 
 (provide 'uru)
 ;;; uru.el ends here
-#+end_src
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jeet Ray</p>
+<p class="date">Created: 2022-11-14 Mon 10:37</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
